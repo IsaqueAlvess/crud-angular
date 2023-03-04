@@ -6,6 +6,7 @@ import { catchError } from 'rxjs/operators';
 
 import { Course } from './../model/course';
 import { CoursesService } from './../services/courses.service';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-courses',
@@ -15,16 +16,20 @@ import { CoursesService } from './../services/courses.service';
 export class CoursesComponent {
 
   courses$: Observable<Course[]>;
-  displayedColumns  = ['name','category'];
+  displayedColumns  = ['name','category','actions'];
 
   //coursesService: CoursesService;
 
   constructor(
     private coursesService: CoursesService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public router: Router,
+    public route: ActivatedRoute
   ) {
+
     //this.courses = [];
     //this.coursesService = new CoursesService();
+
     this.courses$ = this.coursesService.list()
     .pipe(
       catchError( error => {
@@ -35,14 +40,20 @@ export class CoursesComponent {
 
   }
 
-  ngOnInit(): void{
-
-  }
-
   onError(errorMsg: string) {
     this.dialog.open(ErrorDialogComponent, {
       data: errorMsg
     });
   }
+
+  ngOnInit(): void{
+
+  }
+
+  onAdd(){
+    console.log('onAdd');
+    this.router.navigate(['new'], {relativeTo: this.route});
+  }
+
 
 }

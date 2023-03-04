@@ -9,7 +9,7 @@ $custom-theme: mat.define-light-theme((
   color: (
     primary: $custom-app-primary,
     accent: $custom-app-secondary,
-    warn: $custom-app-secondary,
+    warn: $custom-app-warn
   )
  ));
 
