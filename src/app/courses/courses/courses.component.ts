@@ -16,15 +16,15 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class CoursesComponent {
 
   courses$: Observable<Course[]>;
-  displayedColumns  = ['name','category','actions'];
+ 
 
   //coursesService: CoursesService;
 
   constructor(
     private coursesService: CoursesService,
     public dialog: MatDialog,
-    public router: Router,
-    public route: ActivatedRoute
+    private router: Router,
+    private route: ActivatedRoute
   ) {
 
     //this.courses = [];
