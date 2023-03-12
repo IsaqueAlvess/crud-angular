@@ -1,5 +1,10 @@
 <mat-table [dataSource]="courses">
   <!-- Name Column -->
+  <ng-container matColumnDef="id">
+    <mat-header-cell  *matHeaderCellDef>Curso</mat-header-cell>
+    <mat-cell *matCellDef="let course">{{ course.id }}</mat-cell>
+  </ng-container>
+
   <ng-container matColumnDef="name">
     <mat-header-cell  *matHeaderCellDef>Curso</mat-header-cell>
     <mat-cell *matCellDef="let course">{{ course.name }}</mat-cell>
@@ -32,7 +37,8 @@
     </mat-header-cell>
 
     <mat-cell *matCellDef="let course" class="action-column">
-      <button mat-icon-button color="primary" aria-label="Editar curso">
+      <button mat-icon-button color="primary" aria-label="Editar curso"
+        (click)="onEdit(course)">
         <mat-icon>edit</mat-icon>
       </button>
 
