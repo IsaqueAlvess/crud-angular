@@ -1,10 +1,10 @@
 import { Location } from '@angular/common';
 import { Component } from '@angular/core';
-import { NonNullableFormBuilder } from '@angular/forms';
+import { NonNullableFormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ActivatedRoute } from '@angular/router';
-import { Course } from '../../model/course';
 
+import { Course } from '../../model/course';
 import { CoursesService } from '../../services/courses.service';
 
 @Component({
@@ -16,9 +16,12 @@ export class CourseFormComponent {
 
   form = this.formBuilder.group({
     _id: [''],
-    name: [''],
-    category: [''],
-  }); //Grupo de campos == formGroup
+    name: ['',[Validators.required,
+              Validators.minLength(3),
+              Validators.maxLength(100)]
+          ],
+    category: ['', [Validators.required]],
+  }); //Grupo de campos ==> formGroup
 
   constructor(
     private formBuilder: NonNullableFormBuilder,
@@ -61,4 +64,22 @@ export class CourseFormComponent {
   private onError() {
     this.snackBar.open('Erro ao salvar curso', '', { duration: 5000 });
   }
+  getErrorMessage(fieldName: string){
+    const field = this.form.get(fieldName);
+
+    if(field != null && field?.hasError('required')) {//? -> significa que já faz a verificação de nulo
+      return 'Campo obrigatório';
+    }else
+    if(field != null && field?.hasError('minlength')) {//? -> significa que já faz a verificação de nulo
+      const min = '3';
+      return `Tamanho mínimo precisa ser de ${min} caracteres`;
+    }else
+
+    if(field != null && field?.hasError('maxlength')) {//? -> significa que já faz a verificação de nulo
+      const max = '100'
+      return `Tamanho máximo excedido de ${max} caracteres`;
+    }
+    return 'Campo Inválido!';
+  }
+
 }
