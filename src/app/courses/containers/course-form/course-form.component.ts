@@ -39,6 +39,7 @@ export class CourseFormComponent {
       name: course.name,
       category: course.category
     });
+    console.log(course);
   }
 
   onSubmit() {
