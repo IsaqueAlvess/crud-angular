@@ -19,6 +19,25 @@
         </mat-select>
         <mat-error *ngIf="form.get('category')?.invalid">{{ getErrorMessage("category") }}</mat-error>
       </mat-form-field>
+
+      <mat-toolbar>
+        <span>Aulas</span>
+        <button mat-icon-button color="accent">
+          <mat-icon aria-label="Adicionar uma nova aula">add</mat-icon>
+        </button>
+      </mat-toolbar>
+
+      <table>
+        <tr>
+          <td>
+            <mat-form-field class="full-width">
+              <input matInput formControlName="name" #name/>
+            </mat-form-field>
+          </td>
+          <td></td>
+        </tr>
+      </table>
+
     </form>
     <mat-card-actions>
       <button mat-raised-button color="primary" (click)="onSubmit()" class="button-margin">Salvar</button>
